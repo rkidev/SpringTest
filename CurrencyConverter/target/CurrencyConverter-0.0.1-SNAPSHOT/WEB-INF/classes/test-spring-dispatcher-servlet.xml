@@ -1,0 +1,51 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:context="http://www.springframework.org/schema/context"
+xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+                           http://www.springframework.org/schema/mvc 
+        				   http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                           http://www.springframework.org/schema/context 
+        				   http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- Scan the JavaConfig -->
+	<context:component-scan base-package="com.currency.converter.controller" />
+	
+	<mvc:annotation-driven/>
+	
+	<context:property-placeholder location="classpath:currencyrate.properties" />
+	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name="prefix" value="/jsp/"/>
+      <property name="suffix" value=".jsp" />
+   </bean>
+   
+	<bean id="currencyService" class="com.currency.converter.service.CurrencyServiceImpl"></bean>
+	
+	<util:map id="currencyrate" map-class="java.util.HashMap" 
+	key-type="java.lang.String" value-type="java.lang.Double" scope="prototype">
+        <entry key="usdToGbp" value="${usdToGbp}"/>
+        <entry key="usdToInr" value="${usdToInr}"/>
+        <entry key="usdToEur" value="${usdToEur}"/>
+        <entry key="usdToAud" value="${usdToAud}"/>
+        <entry key="gbpToUsd" value="${gbpToUsd}"/>
+        <entry key="gbpToInr" value="${gbpToInr}"/>
+        <entry key="gbpToEur" value="${gbpToEur}"/>
+        <entry key="gbpToAud" value="${gbpToAud}"/>
+        <entry key="inrToUsd" value="${inrToUsd}"/>
+        <entry key="inrToGbp" value="${inrToGbp}"/>
+        <entry key="inrToEur" value="${inrToEur}"/>
+        <entry key="inrToAud" value="${inrToAud}"/>
+        <entry key="eurToUsd" value="${eurToUsd}"/>
+        <entry key="eurToGbp" value="${eurToGbp}"/>
+        <entry key="eurToInr" value="${eurToInr}"/>
+        <entry key="eurToAud" value="${eurToAud}"/>
+        <entry key="audToUsd" value="${audToUsd}"/>
+        <entry key="audToGbp" value="${audToGbp}"/>
+        <entry key="audToInr" value="${audToInr}"/>
+        <entry key="audToEur" value="${audToEur}"/>
+    </util:map>
+    
+</beans>
